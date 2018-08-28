@@ -9,19 +9,30 @@ function apiRequest(searchTerm, callback) {
 	$.getJSON(F2F_SEARCH_URL, request, callback);
 }
 
+function getRecipe(result, callback){
+  const request = {
+    key: '40de15b588ac17a1e0a3fcdb2feeeb7e',
+    rId: result.recipe_id
+  }
+  $.getJSON("http://food2fork.com/api/get", request, callback);
+}
+
 function renderHTML(result) {
-  return `
+
+  let results = `
     <div class='js-result'>
-      <a href="${result.source_url}" target="_blank"><img class='js-result-image' src="${result.image_url}" alt=''></a>
+      <a href="${result.recipe.source_url}" target="_blank"><img class='js-result-image' src="${result.recipe.image_url}" alt=''></a>
       <br>
-      <a href="${result.source_url}" target="_blank"><span class="js-result-name">${result.title}</span></a>
+      <a href="${result.recipe.source_url}" target="_blank"><span class="js-result-name">${result.recipe.title}</span></a>
     </div>
   `;
+
+  $('.results-return').append(results);
 }
 
 function displayCards(data) {
-  const results = data.recipes.map(recipe => renderHTML(recipe));
-  $('.results-return').html(results);
+  $('.results-return').html("");
+  const results = data.recipes.map(recipe => getRecipe(recipe, renderHTML));
 }
 
 function handleSubmit() {
