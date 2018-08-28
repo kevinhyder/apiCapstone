@@ -1,5 +1,4 @@
 const F2F_SEARCH_URL = 'http://food2fork.com/api/search'
-const RECIPE_URL = 'http://food2fork.com'
 
 function apiRequest(searchTerm, callback) {
   const request = {
@@ -13,15 +12,15 @@ function apiRequest(searchTerm, callback) {
 function renderHTML(result) {
   return `
     <div class='js-result'>
-      <a href="${RECIPE_URL}${result.recipes.recipe.source_url}" class='js-result-image' target="_blank"><img src="${result.recipes.recipe.image_url}" alt=''></a>
+      <a href="${result.source_url}" class='js-result-image' target="_blank"><img src="${result.image_url}" alt=''></a>
       <br>
-      <a class="js-result-name" href="${RECIPE_URL}${result.recipes.recipe.source_url}" target="_blank">${result.recipes.recipe.title}</a>
+      <a class="js-result-name" href="${result.source_url}" target="_blank">${result.title}</a>
     </div>
   `;
 }
 
 function displayCards(data) {
-  const results = data.items.map(item => renderHTML(item));
+  const results = data.recipes.map(recipe => renderHTML(recipe));
   $('.results-return').html(results);
 }
 
