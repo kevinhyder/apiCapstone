@@ -4,7 +4,7 @@ function apiRequest(searchTerm, callback) {
   const request = {
 		key: '40de15b588ac17a1e0a3fcdb2feeeb7e',
     q: searchTerm,
-    count: 5
+    count: 30
 	}
 	$.getJSON(F2F_SEARCH_URL, request, callback);
 }
@@ -12,9 +12,9 @@ function apiRequest(searchTerm, callback) {
 function renderHTML(result) {
   return `
     <div class='js-result'>
-      <a href="${result.source_url}" class='js-result-image' target="_blank"><img src="${result.image_url}" alt=''></a>
+      <a href="${result.source_url}" target="_blank"><img class='js-result-image' src="${result.image_url}" alt=''></a>
       <br>
-      <a class="js-result-name" href="${result.source_url}" target="_blank">${result.title}</a>
+      <a href="${result.source_url}" target="_blank"><span class="js-result-name">${result.title}</span></a>
     </div>
   `;
 }
