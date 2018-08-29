@@ -18,7 +18,6 @@ function getRecipe(result, callback){
 }
 
 function renderHTML(result) {
-
   let results = `
     <div class='js-result'>
       <a href="${result.recipe.source_url}" target="_blank"><img class='js-result-image' src="${result.recipe.image_url}" alt=''></a>
