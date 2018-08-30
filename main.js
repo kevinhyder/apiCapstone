@@ -34,6 +34,12 @@ function displayCards(data) {
   const results = data.recipes.map(recipe => getRecipe(recipe, renderHTML));
 }
 
+// function createAlert() {
+//   $('.js-result-image').on('click', function() {
+//     alert(${result.recipe.title});
+//   })
+// }
+
 function handleSubmit() {
   $('.input-form').submit(event => {
     event.preventDefault();

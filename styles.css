@@ -62,3 +62,15 @@ h6 {
     width: 300px; 
     height: 250px;
 }
+
+@media only screen and (max-width: 1000px) {
+    body {
+        width: 700px;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    .js-result {
+        display: block;
+    }
+}
