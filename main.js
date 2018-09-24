@@ -1,28 +1,28 @@
-const F2F_SEARCH_URL = 'http://food2fork.com/api/search'
+const EDA_SEARCH_URL = 'https://api.edamam.com/search'
 
 function apiRequest(searchTerm, callback) {
   const request = {
-		key: '40de15b588ac17a1e0a3fcdb2feeeb7e',
     q: searchTerm,
-    count: 30
-	}
-	$.getJSON(F2F_SEARCH_URL, request, callback);
+    app_id : "18fda3dc",
+    app_key: '8342709f6dd61024819e034ac5c477d2'
+    }
+    $.getJSON(EDA_SEARCH_URL, request, callback);
 }
 
 function getRecipe(result, callback){
   const request = {
-    key: '40de15b588ac17a1e0a3fcdb2feeeb7e',
-    rId: result.recipe_id
+    key: '8342709f6dd61024819e034ac5c477d2',
+    rId: result.uri
   }
-  $.getJSON("http://food2fork.com/api/get", request, callback);
+  $.getJSON("https://api.edamam.com/search?q={searchTerm}&app_id=${app_id}&app_key=${app_key}", request, callback);
 }
 
 function renderHTML(result) {
   let results = `
     <div class='js-result'>
-      <a href="${result.recipe.source_url}" target="_blank"><img class='js-result-image' src="${result.recipe.image_url}" alt=''></a>
+      <a href="${result.recipe.url}" target="_blank"><img class='js-result-image' src="${result.recipe.image}" alt=''></a>
       <br>
-      <a href="${result.recipe.source_url}" target="_blank"><span class="js-result-name">${result.recipe.title}</span></a>
+      <a href="${result.recipe.url}" target="_blank"><span class="js-result-name">${result.recipe.label}</span></a>
     </div>
   `;
 
@@ -33,12 +33,6 @@ function displayCards(data) {
   $('.results-return').html("");
   const results = data.recipes.map(recipe => getRecipe(recipe, renderHTML));
 }
-
-// function createAlert() {
-//   $('.js-result-image').on('click', function() {
-//     alert(${result.recipe.title});
-//   })
-// }
 
 function handleSubmit() {
   $('.input-form').submit(event => {
